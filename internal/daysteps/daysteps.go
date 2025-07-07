@@ -20,27 +20,27 @@ func (ds *DaySteps) Parse(datastring string) (err error) {
 	parse := strings.Split(datastring, ",")
 
 	if len(parse) != 2 {
-		return fmt.Errorf("Ошибка парсинга DaySteps. Длина массива не 2")
+		return fmt.Errorf("daysteps len error: len != 2")
 	}
 
 	steps, err := strconv.Atoi(parse[0])
 	if err != nil {
-		return fmt.Errorf("Ошибка парсинга. Шаги в число")
+		return fmt.Errorf("conversion error: %w", err)
 	}
 
 	if steps <= 0 {
-		return fmt.Errorf("Некорректное количество шагов")
+		return fmt.Errorf("error: steps <= 0")
 	}
 
 	ds.Steps = steps
 
 	duration, err := time.ParseDuration(parse[1])
 	if err != nil {
-		return fmt.Errorf("Ошибка парсинга. Время в time.Duration")
+		return fmt.Errorf("conversion error: %w", err)
 	}
 
 	if duration <= 0 {
-		return fmt.Errorf("Некорректная продолжительность")
+		return fmt.Errorf("errod: duration <= 0")
 	}
 
 	ds.Duration = duration
